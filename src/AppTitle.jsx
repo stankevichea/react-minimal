@@ -9,6 +9,11 @@ const generateRandomArray = (n) =>(
 
 //variables
 const arr = [2, 56, 23, 88, 17, 4];
+const root= [2, 5, 8, 10];
+//methods
+var roots = (rootik) => {
+  return rootik.map(x=>Math.sqrt(x));
+};
 
 export default class AppTitle extends React.Component {
  render() {
@@ -18,6 +23,7 @@ export default class AppTitle extends React.Component {
         <p>Hello World!</p>
         <p>{generateRandomArray(5).toString()}</p>
         <p>{(arr.filter(number=> number>15)).toString()}</p>    
+        <p>{roots(root).toString()}</p>
       </div>
       
     )
