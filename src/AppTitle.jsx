@@ -64,7 +64,17 @@ const  data=[
 ];
 
 
+const setTimeout = () =>{
 
+  rendercount++;
+  console.log("render - "+ rendercount.toString()+":")
+  console.timeEnd("render");
+ 
+};
+const setstart = () =>{
+  console.time("render");
+
+};
 
 const generateArraylab2 = (a,b) =>(
   Array.from({length: b-a+1}, (_,i) => (a)+i )
@@ -76,6 +86,7 @@ const generateArray = (n) =>(
   Array.from({length: n}, (_, i) => i+1 )
   )
 const generateRandomArray = (n) =>(
+ 
     Array.from({length: n}, () => Math.floor(Math.random() * 25 + 1))
     )
 
@@ -85,7 +96,7 @@ const root= [2, 5, 8, 10];
 const dataallstudents=data.map(teacher=>teacher.students.map(student=>student.name));
 const sortdataallstudents=data.map(teacher=>teacher.students.map(student=>student.name));
 const olddataallstudents=data.map(teacher=>teacher.students.filter(student=>student.age>20).map(student=>student.name));
-
+var rendercount=0;
 //methods
 var roots = (rootik) => {
   return rootik.map(x=>Math.sqrt(x));
@@ -129,7 +140,6 @@ export default class AppTitle extends React.Component {
     this.setState({
       b: event.target.value
     });
-    console.log('Value changed B:' + event.target.value);
     if(parseInt(this.state.a)<parseInt(event.target.value) )
     {  this.setState({
         lab2array: generateArraylab2(parseInt(this.state.a), parseInt(event.target.value))});
@@ -157,11 +167,14 @@ export default class AppTitle extends React.Component {
     this.setState({selectedstudents:olddataallstudents});
   };
 
- render() {
 
+  
+
+ render() {
+ 
     return (
       <div>
-         
+      { setstart()}
         Hello World!
         <p>{generateRandomArray(5).toString()}</p>
         <p>{(arr.filter(number=> number>15)).toString()}</p>    
@@ -187,9 +200,13 @@ export default class AppTitle extends React.Component {
       </form>
 
       <p>{this.state.lab2array.toString()}</p>
-     
+     {setTimeout()}
       </div>
+         
+  
       
     )
+    
+    
   }
 }
