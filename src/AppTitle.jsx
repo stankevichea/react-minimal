@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from "react-bootstrap/Button";
+import { Component } from 'react';
 
 //json
 const  data=[
@@ -63,6 +64,11 @@ const  data=[
 ];
 
 
+
+
+
+
+
 //functions
 const generateArray = (n) =>(
   Array.from({length: n}, (_, i) => i+1 )
@@ -95,8 +101,23 @@ export default class AppTitle extends React.Component {
     this.sortstudents=this.sortstudents.bind(this);
     this.oldstudents=this.oldstudents.bind(this);
     this.state={
-      selectedstudents:[]
+      selectedstudents:[],
+      a:0,
+      b:0
     };
+  }
+
+  changeHandlerA = event => {
+    this.setState({
+      a: event.target.value
+    });
+    console.log('Value changed A:' + event.target.value);
+  }
+  changeHandlerB = event => {
+    this.setState({
+      b: event.target.value
+    });
+    console.log('Value changed B:' + event.target.value);
   }
   allstudents(){
   
@@ -114,8 +135,8 @@ export default class AppTitle extends React.Component {
     this.setState({selectedstudents:olddataallstudents});
   };
 
-
  render() {
+
     return (
       <div>
          
@@ -127,7 +148,20 @@ export default class AppTitle extends React.Component {
         <p><Button onClick={this.sortstudents}>Sorted students</Button></p> 
         <p><Button onClick={this.oldstudents}>Old students</Button> </p>
         <h7>{this.state.selectedstudents.toString()}</h7>
-      
+        <form>
+          <input type="number" 
+                 name="a"   
+                 value={this.state.a} 
+                 onChange={this.changeHandlerA} 
+          />
+      </form>
+      <form>
+          <input type="number" 
+                 name="b"   
+                 value={this.state.b} 
+                 onChange={this.changeHandlerB} 
+          />
+      </form>
       
       </div>
       
