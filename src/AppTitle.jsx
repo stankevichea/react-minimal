@@ -66,7 +66,9 @@ const  data=[
 
 
 
-
+const generateArraylab2 = (a,b) =>(
+  Array.from({length: b-a+1}, (_,i) => (a)+i )
+  )
 
 
 //functions
@@ -103,7 +105,8 @@ export default class AppTitle extends React.Component {
     this.state={
       selectedstudents:[],
       a:0,
-      b:0
+      b:0,
+      lab2array:[]
     };
   }
 
@@ -112,12 +115,31 @@ export default class AppTitle extends React.Component {
       a: event.target.value
     });
     console.log('Value changed A:' + event.target.value);
+    if(parseInt(event.target.value)<parseInt(this.state.b) && parseInt(event.target.value)!=0)
+    {  this.setState({
+        lab2array: generateArraylab2(parseInt(event.target.value),parseInt(this.state.b))});
+    }
+    else
+    {
+      this.setState({lab2array: []});
+    }
+    
   }
   changeHandlerB = event => {
     this.setState({
       b: event.target.value
     });
     console.log('Value changed B:' + event.target.value);
+    if(parseInt(this.state.a)<parseInt(event.target.value) )
+    {  this.setState({
+        lab2array: generateArraylab2(parseInt(this.state.a), parseInt(event.target.value))});
+        
+    }
+    else
+    {  
+      this.setState({lab2array: []});
+    }
+    
   }
   allstudents(){
   
@@ -148,6 +170,7 @@ export default class AppTitle extends React.Component {
         <p><Button onClick={this.sortstudents}>Sorted students</Button></p> 
         <p><Button onClick={this.oldstudents}>Old students</Button> </p>
         <h7>{this.state.selectedstudents.toString()}</h7>
+        <h4>Lab2</h4>
         <form>
           <input type="number" 
                  name="a"   
@@ -162,7 +185,9 @@ export default class AppTitle extends React.Component {
                  onChange={this.changeHandlerB} 
           />
       </form>
-      
+
+      <p>{this.state.lab2array.toString()}</p>
+     
       </div>
       
     )
