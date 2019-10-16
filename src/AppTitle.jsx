@@ -75,6 +75,10 @@ const setstart = () =>{
   console.time("render");
 
 };
+const blia = () =>{
+  console.log("czmo");
+
+};
 
 const generateArraylab2 = (a,b) =>(
   Array.from({length: b-a+1}, (_,i) => (a)+i )
@@ -92,7 +96,7 @@ const generateRandomArray = (n) =>(
 
 //variables
 const arr = [2, 56, 23, 88, 17, 4];
-const root= [2, 5, 8, 10];
+const root= [2, 5, 8, 10,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4,2, 56, 23, 88, 17, 4];
 const dataallstudents=data.map(teacher=>teacher.students.map(student=>student.name));
 const sortdataallstudents=data.map(teacher=>teacher.students.map(student=>student.name));
 const olddataallstudents=data.map(teacher=>teacher.students.filter(student=>student.age>20).map(student=>student.name));
@@ -117,10 +121,13 @@ export default class AppTitle extends React.Component {
       selectedstudents:[],
       a:0,
       b:0,
-      lab2array:[]
-    };
+      lab2array:[],
+      srtarray:[],
+      ifclicked:false,
+      alreadydisplayed:false}
   }
 
+ 
   changeHandlerA = event => {
     this.setState({
       a: event.target.value
@@ -128,7 +135,8 @@ export default class AppTitle extends React.Component {
     console.log('Value changed A:' + event.target.value);
     if(parseInt(event.target.value)<parseInt(this.state.b) && parseInt(event.target.value)!=0)
     {  this.setState({
-        lab2array: generateArraylab2(parseInt(event.target.value),parseInt(this.state.b))});
+        lab2array: generateArraylab2(parseInt(event.target.value),parseInt(this.state.b)),
+      alreadydisplayed:false});
     }
     else
     {
@@ -142,7 +150,8 @@ export default class AppTitle extends React.Component {
     });
     if(parseInt(this.state.a)<parseInt(event.target.value) )
     {  this.setState({
-        lab2array: generateArraylab2(parseInt(this.state.a), parseInt(event.target.value))});
+        lab2array: generateArraylab2(parseInt(this.state.a), parseInt(event.target.value)),
+        alreadydisplayed:false});
         
     }
     else
@@ -151,6 +160,9 @@ export default class AppTitle extends React.Component {
     }
     
   }
+
+ 
+
   allstudents(){
   
     this.setState({selectedstudents:dataallstudents});
@@ -168,8 +180,20 @@ export default class AppTitle extends React.Component {
   };
 
 
+  rerenderArray =() =>{
+    this.setState({
+    ifclicked: !this.ifclicked,
   
+})
+if(!this.state.alreadydisplayed)
+{
+  
+  this.setState({srtarray: roots(this.state.lab2array),
+                 alreadydisplayed:true });
 
+}
+
+}
  render() {
  
     return (
@@ -200,7 +224,16 @@ export default class AppTitle extends React.Component {
       </form>
 
       <p>{this.state.lab2array.toString()}</p>
-     {setTimeout()}
+    
+        <p><Button onClick={this.rerenderArray}  >Process array</Button></p>  
+      <b>{this.state.ifclicked ? this.state.srtarray.toString() : '' }</b>
+
+
+
+
+
+      {setTimeout()}
+
       </div>
          
   
